@@ -3,6 +3,7 @@ import {Home} from './pages/Home';
 import {Favorite} from './pages/Favorite';
 import {Provider} from 'react-redux';
 import {store} from './store';
+import NavigationBar from "./components/NavigationBar"
 
 import './App.css';
 
@@ -18,6 +19,7 @@ const App = () => {
                         <Route path="/" element={<Home />} />
                         <Route path="/favorite" element={<Favorite />} />
                     </Routes>
+                    <NavigationBar/>
                 </div>
             </Router>
         </Provider>
