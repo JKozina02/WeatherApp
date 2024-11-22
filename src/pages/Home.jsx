@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 export function Home() {
-  const ApiKey = "YOUR API HERE";
+  const ApiKey = "c6d6107bd5446e84cc38e62dc9355d7f";
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
+  const [favorites, setFavorites] = useState([]); // State for favorite cities
 
   const fetchWeather = async () => {
     try {
@@ -20,6 +21,13 @@ export function Home() {
       setWeather(null);
     }
   };
+
+  const addFavorite = (cityName) => {
+    if (cityName && !favorites.includes(cityName)) {
+      setFavorites([...favorites, cityName]);
+    }
+  };
+
   return (
     <div>
       <input
@@ -35,8 +43,22 @@ export function Home() {
           <h3>{weather.name}</h3>
           <p>{weather.weather[0].description}</p>
           <p>{Math.round(weather.main.temp - 273.15)}°C</p>
+          <button 
+            onClick={() => addFavorite(weather.name)} 
+            disabled={favorites.includes(weather.name)}
+          >
+            {favorites.includes(weather.name) ? 'Added to Favorites' : 'Favorite'}
+          </button>
         </div>
       )}
+      <div>
+        <h3>Favorite Cities</h3>
+        <ul>
+          {favorites.map((favCity, index) => (
+            <li key={index}>{favCity}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
