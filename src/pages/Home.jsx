@@ -1,8 +1,9 @@
 import './Home.css';
+import '../images/icons';
 import React, { useState, useEffect } from 'react';
 import { getFavorites, addRemoveFavorite } from '../models/FavoriteModel';
 import { fetchWeather } from '../models/WeatherModel';
-import WeatherComponent from '../components/WeatherComponent'; // Poprawna ścieżka importu
+import WeatherComponent from '../components/WeatherComponent';
 
 export function Home() {
   const [weather, setWeather] = useState(null);
@@ -33,14 +34,18 @@ export function Home() {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="Enter city"
-      />
-      <button onClick={handleFetchWeather}>Get Weather</button>
+    <div className='center'>
+      <div className="search-background">
+        <div className='search-field'>
+          <button className='search-button' onClick={handleFetchWeather}><img src='../images/icons/Search.svg'/></button>
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            placeholder="Enter city"
+          />
+        </div>
+      
       {error && <p>{error}</p>}
       {weather && (
         <div>
@@ -51,6 +56,7 @@ export function Home() {
           />
         </div>
       )}
+      </div> 
     </div>
   );
 }

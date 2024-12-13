@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ApiKey = "API KEY HERE";
+const ApiKey = "API KEY";
 
 export const fetchWeather = async (city) => {
   try {
